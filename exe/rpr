@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'ripper'
+require 'pp'
+
+ARGV.each do |fname|
+  code = File.read(fname)
+  pp Ripper.sexp code
+end
+
