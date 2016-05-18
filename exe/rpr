@@ -2,9 +2,29 @@
 
 require 'ripper'
 require 'pp'
+require 'optparse'
+require 'pry'
+
+opt = OptionParser.new
+
+OPT = {
+  formatter: :pp,
+}
+
+opt.on('-f=VAL', '--formatter=VAL'){|v| OPT[:formatter] = v.to_sym}
+
+opt.parse!(ARGV)
 
 ARGV.each do |fname|
   code = File.read(fname)
-  pp Ripper.sexp code
-end
+  res = Ripper.sexp code
 
+  case OPT[:formatter]
+  when :pp
+    pp res
+  when :pry
+    binding.pry(res)
+  else
+    raise "#{OPT[:formatter]} is unknown formatter."
+  end
+end
