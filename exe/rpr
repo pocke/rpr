@@ -7,11 +7,18 @@ opt = OptionParser.new
 
 OPT = {
   formatter: :pp,
+  version: nil,
 }
 
 opt.on('-f=VAL', '--formatter=VAL'){|v| OPT[:formatter] = v.to_sym}
+opt.on('-v', '--version'){|v| OPT[:version] = v}
 
 opt.parse!(ARGV)
+
+if OPT[:version]
+  require 'rpr/version'
+  puts Rpr::VERSION
+end
 
 ARGV.each do |fname|
   code = File.read(fname)
