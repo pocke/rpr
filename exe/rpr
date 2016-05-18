@@ -8,9 +8,11 @@ opt = OptionParser.new
 OPT = {
   formatter: :pp,
   version: nil,
+  method: :sexp,
 }
 
 opt.on('-f=VAL', '--formatter=VAL'){|v| OPT[:formatter] = v.to_sym}
+opt.on('-m=VAL', '--version=VAL'){|v| OPT[:method] = v}
 opt.on('-v', '--version'){|v| OPT[:version] = v}
 
 opt.parse!(ARGV)
@@ -22,7 +24,7 @@ end
 
 ARGV.each do |fname|
   code = File.read(fname)
-  res = Ripper.sexp code
+  res = Ripper.__send__ OPT[:method], code
 
   case OPT[:formatter]
   when :pp
