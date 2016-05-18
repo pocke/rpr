@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'ripper'
-require 'pp'
 require 'optparse'
-require 'pry'
 
 opt = OptionParser.new
 
@@ -21,9 +19,14 @@ ARGV.each do |fname|
 
   case OPT[:formatter]
   when :pp
+    require 'pp'
     pp res
   when :pry
+    require 'pry'
     binding.pry(res)
+  when :json
+    require 'json'
+    puts JSON.pretty_generate(res)
   else
     raise "#{OPT[:formatter]} is unknown formatter."
   end
