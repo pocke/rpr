@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Masataka Kuwabara"]
   spec.email         = ["p.ck.t22@gmail.com"]
 
-  spec.summary       = %q{to do }
-  spec.description   = %q{to do }
+  spec.summary       = %q{Ripper on command line}
+  spec.description   = %q{Ripper on command line}
   spec.homepage      = "https://github.com/pocke/rpr"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
