@@ -12,6 +12,7 @@ OPT = {
 }
 
 opt.on('-f=VAL', '--formatter=VAL'){|v| OPT[:formatter] = v.to_sym}
+opt.on('-o=VAL', '--out=VAL'){|v| $stdout = File.new(v, 'w')}
 opt.on('-m=VAL', '--method=VAL'){|v| OPT[:method] = v}
 opt.on('-v', '--version'){|v| OPT[:version] = v}
 
@@ -31,6 +32,7 @@ ARGV.each do |fname|
     require 'pp'
     pp res
   when :pry
+    raise "Can't specify --out option with pry formatter" unless $stdout.tty?
     require 'pry'
     binding.pry(res)
   when :json
@@ -40,3 +42,5 @@ ARGV.each do |fname|
     raise "#{OPT[:formatter]} is unknown formatter."
   end
 end
+
+$stdout.close
