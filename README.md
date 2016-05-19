@@ -1,6 +1,6 @@
 # RPR
 
-Command line :heart: [Ripper](http://ruby-doc.org/stdlib-2.3.0/libdoc/ripper/rdoc/Ripper.html).
+[Ripper](http://ruby-doc.org/stdlib-2.3.0/libdoc/ripper/rdoc/Ripper.html) :heart: Command Line.
 
 [![Gem Version](https://badge.fury.io/rb/rpr.svg)](https://badge.fury.io/rb/rpr)
 
@@ -106,7 +106,7 @@ $ rpr hello.rb --formatter json
 ]
 ```
 
-Inspect AST with [pry](https://github.com/pry/pry).
+Inspect an AST with [pry](https://github.com/pry/pry).
 
 ```sh
 $ rpr hello.rb --formatter pry
