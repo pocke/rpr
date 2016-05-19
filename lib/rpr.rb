@@ -13,27 +13,24 @@ module Rpr
         puts VERSION
       end
 
+      formatter = find_formatter(options[:formatter])
       ARGV.each do |fname|
         code = File.read(fname)
         res = Ripper.__send__ options[:method], code
 
-        case options[:formatter]
-        when :pp
-          require 'pp'
-          pp res
-        when :pry
-          raise "Can't specify --out option with pry formatter" unless $stdout.tty?
-          require 'pry'
-          binding.pry(res)
-        when :json
-          require 'json'
-          puts JSON.pretty_generate(res)
-        else
-          raise "#{options[:formatter]} is unknown formatter."
-        end
+        formatter.print(res)
       end
     ensure
       $stdout.close unless $stdout.tty?
+    end
+
+    # @param [String] name
+    # @return [Module]
+    def find_formatter(name)
+      require "rpr/formatter/#{name}"
+      Formatter.const_get(:"#{name[0].upcase}#{name[1..-1]}")
+    rescue LoadError
+      raise "#{name} is unknown formatter."
     end
 
     # @param [Array<String>] args
