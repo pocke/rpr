@@ -32,15 +32,15 @@ module Rpr
           raise "#{options[:formatter]} is unknown formatter."
         end
       end
-
-      $stdout.close
+    ensure
+      $stdout.close unless $stdout.tty?
     end
 
     # @param [Array<String>] args
     def parse_args(args)
       res = {
         formatter: :pp,
-        version: nil,
+        version: false,
         method: :sexp,
       }
 
