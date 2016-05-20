@@ -2,4 +2,6 @@
 
 require 'rpr'
 
-Rpr.run(ARGV)
+args = Rpr::Config.laod
+args.concat(ARGV)
+Rpr.run(args)

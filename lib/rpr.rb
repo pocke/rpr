@@ -1,4 +1,6 @@
 require "rpr/version"
+require 'rpr/config'
+
 require 'ripper'
 require 'optparse'
 

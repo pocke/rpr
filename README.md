@@ -126,6 +126,21 @@ locals: _  __  _dir_  _ex_  _file_  _in_  _out_  _pry_
 [3] pry(#<Array>)> exit
 ```
 
+### Configuration
+
+Rpr searches config file from `./.rpr` or `~/.config/rpr`. `./.rpr` is priority.
+
+Config file is space separated options.
+
+#### Example.
+
+`./.rpr` or `~/.config/rpr`
+
+```
+-f pry
+```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
