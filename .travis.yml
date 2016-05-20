@@ -6,7 +6,7 @@ rvm:
   - ruby-head
 
 cache: bundler
-bundler_args: --jobs=4 --retry=3 --deployment
+bundler_args: --jobs=4 --retry=3
 sudo: false
 
 
