@@ -6,4 +6,10 @@ class TestRpr < Minitest::Test
     assert { f.is_a? Module }
     assert { f.respond_to? :print }
   end
+
+  def test_find_parser
+    f = Rpr.find_parser('sexp')
+    assert { f.is_a? Module }
+    assert { f.respond_to? :parse }
+  end
 end

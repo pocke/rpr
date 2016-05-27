@@ -16,9 +16,10 @@ module Rpr
       end
 
       formatter = find_formatter(options[:formatter])
+      parser = find_parser(options[:method])
       ARGV.each do |fname|
         code = File.read(fname)
-        res = Ripper.__send__ options[:method], code
+        res = parser.parse(code)
 
         formatter.print(res)
       end
@@ -33,6 +34,15 @@ module Rpr
       Formatter.const_get(:"#{name[0].upcase}#{name[1..-1]}")
     rescue LoadError
       raise "#{name} is unknown formatter."
+    end
+
+    # @param [String] name
+    # @return [Module]
+    def find_parser(name)
+      require "rpr/parser/#{name}"
+      Parser.const_get(:"#{name[0].upcase}#{name[1..-1]}")
+    rescue LoadError
+      raise "#{name} is unknown parser."
     end
 
     # @param [Array<String>] args
