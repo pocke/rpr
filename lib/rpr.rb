@@ -16,7 +16,7 @@ module Rpr
       end
 
       formatter = find_formatter(options[:formatter])
-      parser = find_parser(options[:method])
+      parser = find_parser(options[:parser])
       args.each do |fname|
         code = File.read(fname)
         res = parser.parse(code)
@@ -50,14 +50,14 @@ module Rpr
       res = {
         formatter: :pp,
         version: false,
-        method: :sexp,
+        parser: :sexp,
       }
 
       opt = OptionParser.new
 
       opt.on('-f=VAL', '--formatter=VAL'){|v| res[:formatter] = v.to_sym}
       opt.on('-o=VAL', '--out=VAL'){|v| $stdout = File.new(v, 'w')}
-      opt.on('-m=VAL', '--method=VAL'){|v| res[:method] = v}
+      opt.on('-p=VAL', '--parser=VAL'){|v| res[:parser] = v}
       opt.on('-v', '--version'){|v| res[:version] = v}
 
       opt.parse!(args)
