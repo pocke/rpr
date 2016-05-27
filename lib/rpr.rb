@@ -17,7 +17,7 @@ module Rpr
 
       formatter = find_formatter(options[:formatter])
       parser = find_parser(options[:method])
-      ARGV.each do |fname|
+      args.each do |fname|
         code = File.read(fname)
         res = parser.parse(code)
 
