@@ -36,25 +36,14 @@ $ rpr hello.rb
     false]]]]
 ```
 
-### Specify Method
+### Specify Parser
 
 Default: `sexp`
 
 ```sh
-$ rpr hello.rb --method sexp_raw
-[:program,
- [:stmts_add,
-  [:stmts_new],
-  [:command,
-   [:@ident, "puts", [1, 0]],
-   [:args_add_block,
-    [:args_add,
-     [:args_new],
-     [:string_literal,
-      [:string_add,
-       [:string_content],
-       [:@tstring_content, "Hello world", [1, 6]]]]],
-    false]]]]
+$ rpr hello.rb --parser rubocop
+s(:send, nil, :puts,
+  s(:str, "Hello world"))
 ```
 
 ```sh
