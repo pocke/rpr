@@ -31,5 +31,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard', '~> 2.13.0'
   spec.add_development_dependency 'guard-minitest', '~> 2.4.4'
   spec.add_development_dependency 'guard-bundler', '~> 2.1.0'
-  spec.add_development_dependency "rubocop", "~> 0.40.0"
 end
