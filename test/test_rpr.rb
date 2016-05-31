@@ -18,6 +18,7 @@ class TestRpr < Minitest::Test
     assert { opt[:formatter].is_a? Symbol }
     assert { opt[:version] == false }
     assert { opt[:parser].is_a? Symbol }
+    assert { opt[:expression].nil? }
   end
 
   def test_parse_args_when_specify_pry_formatter
@@ -25,5 +26,14 @@ class TestRpr < Minitest::Test
     assert { opt[:formatter] == :pry }
     assert { opt[:version] == false }
     assert { opt[:parser].is_a? Symbol }
+    assert { opt[:expression].nil? }
+  end
+
+  def test_parse_args_when_specify_expression
+    opt = Rpr.parse_args(['-e', 'puts foo'])
+    assert { opt[:formatter].is_a? Symbol }
+    assert { opt[:version] == false }
+    assert { opt[:parser].is_a? Symbol }
+    assert { opt[:expression] == 'puts foo' }
   end
 end

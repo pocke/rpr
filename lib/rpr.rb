@@ -3,6 +3,7 @@ require 'rpr/config'
 
 require 'ripper'
 require 'optparse'
+require 'stringio'
 
 module Rpr
   class << self
@@ -17,11 +18,17 @@ module Rpr
 
       formatter = find_formatter(options[:formatter])
       parser = find_parser(options[:parser])
-      args.each do |fname|
-        code = File.read(fname)
-        res = parser.parse(code)
 
+      if options[:expression]
+        res = parser.parse(options[:expression])
         formatter.print(res)
+      else
+        args.each do |fname|
+          code = File.read(fname)
+          res = parser.parse(code)
+
+          formatter.print(res)
+        end
       end
     ensure
       $stdout.close unless $stdout.tty?
@@ -51,13 +58,15 @@ module Rpr
         formatter: :pp,
         version: false,
         parser: :sexp,
+        expression: nil,
       }
 
       opt = OptionParser.new
 
-      opt.on('-f=VAL', '--formatter=VAL'){|v| res[:formatter] = v.to_sym}
-      opt.on('-o=VAL', '--out=VAL'){|v| $stdout = File.new(v, 'w')}
-      opt.on('-p=VAL', '--parser=VAL'){|v| res[:parser] = v.to_sym}
+      opt.on('-f=FORMATTER', '--formatter=FORMATTER'){|v| res[:formatter] = v.to_sym}
+      opt.on('-o=FILE', '--out=FILE'){|v| $stdout = File.new(v, 'w')}
+      opt.on('-p=PARSER', '--parser=PARSER'){|v| res[:parser] = v.to_sym}
+      opt.on('-e=CODE'){|v| res[:expression] = v}
       opt.on('-v', '--version'){|v| res[:version] = v}
 
       opt.parse!(args)
