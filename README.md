@@ -1,8 +1,9 @@
 # RPR
 
-[Ripper](http://ruby-doc.org/stdlib-2.3.0/libdoc/ripper/rdoc/Ripper.html) :heart: Command Line.
+Ruby's AST :heart: Command Line.
 
 [![Gem Version](https://badge.fury.io/rb/rpr.svg)](https://badge.fury.io/rb/rpr)
+[![Build Status](https://travis-ci.org/pocke/rpr.svg?branch=master)](https://travis-ci.org/pocke/rpr)
 
 ## Installation
 
