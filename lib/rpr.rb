@@ -27,7 +27,7 @@ module Rpr
       $stdout.close unless $stdout.tty?
     end
 
-    # @param [String] name
+    # @param [Symbol] name
     # @return [Module]
     def find_formatter(name)
       require "rpr/formatter/#{name}"
@@ -36,7 +36,7 @@ module Rpr
       raise "#{name} is unknown formatter."
     end
 
-    # @param [String] name
+    # @param [Symbol] name
     # @return [Module]
     def find_parser(name)
       require "rpr/parser/#{name}"
@@ -57,7 +57,7 @@ module Rpr
 
       opt.on('-f=VAL', '--formatter=VAL'){|v| res[:formatter] = v.to_sym}
       opt.on('-o=VAL', '--out=VAL'){|v| $stdout = File.new(v, 'w')}
-      opt.on('-p=VAL', '--parser=VAL'){|v| res[:parser] = v}
+      opt.on('-p=VAL', '--parser=VAL'){|v| res[:parser] = v.to_sym}
       opt.on('-v', '--version'){|v| res[:version] = v}
 
       opt.parse!(args)
