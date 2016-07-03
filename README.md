@@ -4,6 +4,7 @@ RPR displays Ruby's AST on command line.
 
 [![Gem Version](https://badge.fury.io/rb/rpr.svg)](https://badge.fury.io/rb/rpr)
 [![Build Status](https://travis-ci.org/pocke/rpr.svg?branch=master)](https://travis-ci.org/pocke/rpr)
+[![Coverage Status](https://coveralls.io/repos/github/pocke/rpr/badge.svg?branch=coverage)](https://coveralls.io/github/pocke/rpr?branch=coverage)
 
 ## Support parsers
 
