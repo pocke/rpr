@@ -1,9 +1,15 @@
 # RPR
 
-Ruby's AST :heart: Command Line.
+RPR displays Ruby's AST on command line.
 
 [![Gem Version](https://badge.fury.io/rb/rpr.svg)](https://badge.fury.io/rb/rpr)
 [![Build Status](https://travis-ci.org/pocke/rpr.svg?branch=master)](https://travis-ci.org/pocke/rpr)
+
+## Support parsers
+
+- [Ripper](http://ruby-doc.org/stdlib-2.3.0/libdoc/ripper/rdoc/Ripper.html)
+- [RuboCop](https://github.com/bbatsov/rubocop)
+- [Parser](https://github.com/whitequark/parser)
 
 ## Installation
 
