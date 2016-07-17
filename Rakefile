@@ -1,6 +1,6 @@
 require "bundler/gem_tasks"
 require 'rake/testtask'
-task :default => :spec
+task :default => :test
 
 Rake::TestTask.new do |test|
   test.libs << 'test'
