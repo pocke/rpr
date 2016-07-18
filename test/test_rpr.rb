@@ -21,12 +21,16 @@ class TestRpr < Minitest::Test
     assert { opt[:expression].nil? }
   end
 
-  def test_parse_args_when_specify_pry_formatter
-    opt = Rpr.parse_args(['-f', 'pry'])
-    assert { opt[:formatter] == :pry }
-    assert { opt[:version] == false }
-    assert { opt[:parser].is_a? Symbol }
-    assert { opt[:expression].nil? }
+  def test_parse_args_when_specify_formatter
+    formatters = %w[json pp pry]
+
+    formatters.each do |formatter|
+      opt = Rpr.parse_args(['-f', formatter])
+      assert { opt[:formatter] == formatter.to_sym }
+      assert { opt[:version] == false }
+      assert { opt[:parser].is_a? Symbol }
+      assert { opt[:expression].nil? }
+    end
   end
 
   def test_parse_args_when_specify_expression
