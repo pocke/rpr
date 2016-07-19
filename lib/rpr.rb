@@ -6,6 +6,9 @@ require 'optparse'
 require 'stringio'
 
 module Rpr
+  class UnknownFormatter < ArgumentError; end
+  class UnknownParser < ArgumentError; end
+
   class << self
     # @param [Array<String>] args
     def run(args)
@@ -40,7 +43,7 @@ module Rpr
       require "rpr/formatter/#{name}"
       Formatter.const_get(:"#{name[0].upcase}#{name[1..-1]}")
     rescue LoadError
-      raise "#{name} is unknown formatter."
+      raise UnknownFormatter, "#{name} is unknown formatter."
     end
 
     # @param [Symbol] name
@@ -49,7 +52,7 @@ module Rpr
       require "rpr/parser/#{name}"
       Parser.const_get(:"#{name[0].upcase}#{name[1..-1]}")
     rescue LoadError
-      raise "#{name} is unknown parser."
+      raise UnknownParser, "#{name} is unknown parser."
     end
 
     # @param [Array<String>] args

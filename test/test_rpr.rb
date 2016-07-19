@@ -2,15 +2,37 @@ require 'test_helper'
 
 class TestRpr < Minitest::Test
   def test_find_formatter
-    f = Rpr.find_formatter('pry')
-    assert { f.is_a? Module }
-    assert { f.respond_to? :print }
+    formatters = %w[json pp pry]
+
+    formatters.each do |formatter|
+      f = Rpr.find_formatter(formatter)
+      assert { f.is_a? Module }
+      assert { f.respond_to? :print }
+    end
+  end
+
+  def test_find_formatter_with_unknown_formatter
+    Rpr.find_formatter(SecureRandom.hex(20))
+  rescue Rpr::UnknownFormatter => ex
+  else
+    raise "Should raise UnknownFormatter, but not raise"
   end
 
   def test_find_parser
-    f = Rpr.find_parser('sexp')
-    assert { f.is_a? Module }
-    assert { f.respond_to? :parse }
+    parsers = %w[parser rubocop sexp tokenize]
+
+    parsers.each do |parser|
+      f = Rpr.find_parser(parser)
+      assert { f.is_a? Module }
+      assert { f.respond_to? :parse }
+    end
+  end
+
+  def test_find_parser_with_unknown_parser
+    Rpr.find_parser(SecureRandom.hex(20))
+  rescue Rpr::UnknownParser => ex
+  else
+    raise "Should raise UnknownParser, but not raise"
   end
 
   def test_parse_args_when_args_is_empty
