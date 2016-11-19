@@ -33,6 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard', '~> 2.13.0'
   spec.add_development_dependency 'guard-minitest', '~> 2.4.4'
   spec.add_development_dependency 'guard-bundler', '~> 2.1.0'
-  spec.add_development_dependency 'coveralls', '~> 0.8.13'
-  spec.add_development_dependency 'simplecov', '~> 0.11.0'
+  spec.add_development_dependency 'coveralls', '~> 0.8.15'
+  spec.add_development_dependency 'simplecov', '~> 0.12.0'
 end
