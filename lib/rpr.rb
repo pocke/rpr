@@ -60,7 +60,7 @@ module Rpr
       res = {
         formatter: :pp,
         version: false,
-        parser: :sexp,
+        parser: :rubocop,
         expression: nil,
       }
 
