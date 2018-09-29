@@ -52,7 +52,12 @@ module Rpr
       require "rpr/parser/#{name}"
       Parser.const_get(:"#{name[0].upcase}#{name[1..-1]}")
     rescue LoadError
-      raise UnknownParser, "#{name} is unknown parser."
+      raise UnknownParser, "#{name} is unknown parser. It supports #{self.parsers.join('|')}"
+    end
+
+    def parsers
+      Dir.glob(File.join(__dir__, 'rpr/parser/*.rb'))
+        .map { |fname| File.basename(fname, '.rb')}
     end
 
     # @param [Array<String>] args
@@ -68,7 +73,7 @@ module Rpr
 
       opt.on('-f=FORMATTER', '--formatter=FORMATTER'){|v| res[:formatter] = v.to_sym}
       opt.on('-o=FILE', '--out=FILE'){|v| $stdout = File.new(v, 'w')}
-      opt.on('-p=PARSER', '--parser=PARSER'){|v| res[:parser] = v.to_sym}
+      opt.on('-p=PARSER', '--parser=PARSER', self.parsers.join('|')){|v| res[:parser] = v.to_sym}
       opt.on('-e=CODE'){|v| res[:expression] = v}
       opt.on('-v', '--version'){|v| res[:version] = v}
 
