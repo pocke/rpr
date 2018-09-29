@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'securerandom'
 
 class TestRpr < Minitest::Test
   def test_find_formatter
@@ -13,7 +14,7 @@ class TestRpr < Minitest::Test
 
   def test_find_formatter_with_unknown_formatter
     Rpr.find_formatter(SecureRandom.hex(20))
-  rescue Rpr::UnknownFormatter => ex
+  rescue Rpr::UnknownFormatter
   else
     raise "Should raise UnknownFormatter, but not raise"
   end
@@ -30,7 +31,7 @@ class TestRpr < Minitest::Test
 
   def test_find_parser_with_unknown_parser
     Rpr.find_parser(SecureRandom.hex(20))
-  rescue Rpr::UnknownParser => ex
+  rescue Rpr::UnknownParser
   else
     raise "Should raise UnknownParser, but not raise"
   end
