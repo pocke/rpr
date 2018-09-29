@@ -43,7 +43,12 @@ module Rpr
       require "rpr/formatter/#{name}"
       Formatter.const_get(:"#{name[0].upcase}#{name[1..-1]}")
     rescue LoadError
-      raise UnknownFormatter, "#{name} is unknown formatter."
+      raise UnknownFormatter, "#{name} is unknown formatter. It supports #{self.formatters.join('|')}"
+    end
+
+    def formatters
+      Dir.glob(File.join(__dir__, 'rpr/formatter/*.rb'))
+        .map { |fname| File.basename(fname, '.rb')}
     end
 
     # @param [Symbol] name
@@ -71,7 +76,7 @@ module Rpr
 
       opt = OptionParser.new
 
-      opt.on('-f=FORMATTER', '--formatter=FORMATTER'){|v| res[:formatter] = v.to_sym}
+      opt.on('-f=FORMATTER', '--formatter=FORMATTER', self.formatters.join('|')){|v| res[:formatter] = v.to_sym}
       opt.on('-o=FILE', '--out=FILE'){|v| $stdout = File.new(v, 'w')}
       opt.on('-p=PARSER', '--parser=PARSER', self.parsers.join('|')){|v| res[:parser] = v.to_sym}
       opt.on('-e=CODE'){|v| res[:expression] = v}
