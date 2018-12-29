@@ -142,7 +142,7 @@ $ rpr hello.rb -f dot | dot -Tpng -oast.png
 $ open ast.png
 ```
 
-![ast](https://user-images.githubusercontent.com/4361134/50540867-63b51300-0bdd-11e9-9b0c-63aa70e980be.png)
+![ast](https://user-images.githubusercontent.com/4361134/50541128-5fd7bf80-0be2-11e9-81c0-e6f239c4bbd3.png)
 
 ### Configuration
 
