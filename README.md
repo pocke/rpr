@@ -9,8 +9,14 @@ RPR displays Ruby's AST on command line.
 ## Support parsers
 
 - [Ripper](http://ruby-doc.org/stdlib-2.3.0/libdoc/ripper/rdoc/Ripper.html)
-- [RuboCop](https://github.com/bbatsov/rubocop)
+  - `sexp`
+  - `lex`
+  - `tokenize`
 - [Parser](https://github.com/whitequark/parser)
+- [RuboCop](https://github.com/bbatsov/rubocop)
+- [RubyParser](https://github.com/seattlerb/ruby_parser)
+- RubyVM::AbstractSyntaxTree (Since Ruby 2.6)
+- [MinRuby](https://github.com/mame/minruby)
 
 ## Installation
 
@@ -46,7 +52,10 @@ $ rpr hello.rb
 
 ### Specify Parser
 
-Default: `sexp`
+The default parser is `sexp`.
+You can find all supported parsers with `--help` option.
+
+For example:
 
 ```sh
 $ rpr hello.rb --parser rubocop
@@ -61,7 +70,10 @@ $ rpr hello.rb --method tokenize
 
 ### Specify output formatter
 
-Default: `pp`
+The default formatter is `pp`.
+You can find all supported formatters with `--help` option.
+
+For example:
 
 ```sh
 $ rpr hello.rb --formatter json
@@ -122,6 +134,15 @@ self.methods: __pry__
 locals: _  __  _dir_  _ex_  _file_  _in_  _out_  _pry_
 [3] pry(#<Array>)> exit
 ```
+
+Print an AST as a PNG image with Graphviz.
+
+```sh
+$ rpr hello.rb -f dot | dot -Tpng -oast.png
+$ open ast.png
+```
+
+![ast](https://user-images.githubusercontent.com/4361134/50540867-63b51300-0bdd-11e9-9b0c-63aa70e980be.png)
 
 ### Configuration
 
