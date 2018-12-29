@@ -74,7 +74,7 @@ module Rpr
         shape = object.traversable? ? 'oval' : 'box'
         id = gen_id()
 
-        puts "#{id} -> #{parent}"
+        puts "#{parent} -> #{id}"
         puts "#{id}[ label=#{label.inspect} shape=#{shape} ]"
 
         if object.traversable?
