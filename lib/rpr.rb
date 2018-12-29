@@ -19,8 +19,8 @@ module Rpr
         puts VERSION
       end
 
-      formatter = find_formatter(options[:formatter])
       parser = find_parser(options[:parser])
+      formatter = find_formatter(options[:formatter])
 
       if options[:expression]
         res = parser.parse(options[:expression])
